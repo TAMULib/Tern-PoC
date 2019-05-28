@@ -5,11 +5,11 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>edu.tamu</groupId>
-	<artifactId>tern-poc</artifactId>
+	<artifactId>tern-ui</artifactId>
 	<version>2.0.0</version>
 
-	<name>Tern-Poc</name>
-	<description>An example webservice using the TAMU-Webservice-Core.</description>
+	<name>Tern-PoC</name>
+	<description>FOLIO Migration Utility.</description>
 
 	<parent>
     <groupId>edu.tamu.weaver</groupId>
