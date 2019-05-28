@@ -5,10 +5,10 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>edu.tamu</groupId>
-	<artifactId>tamu-webservice-seed</artifactId>
+	<artifactId>tern-poc</artifactId>
 	<version>2.0.0</version>
 
-	<name>TAMU-Webservice-Seed</name>
+	<name>Tern-Poc</name>
 	<description>An example webservice using the TAMU-Webservice-Core.</description>
 
 	<parent>
