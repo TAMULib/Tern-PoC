@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+	<base href="/tern-poc/">
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Tern PoC :: Texas A&amp;M Libraries</title>
+
+	<link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon" />
+
+</head>
+<body style="display:none">
+	<!--[if lt IE 7]>
+    	<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+
+	<!-- Content placed here will appear on every page -->
+	<main>
+
+    <tamuheader title=""></tamuheader>
+    
+    <wvr-hero 
+      full-width="true"
+      background-image="resources/images/bird.jpg"
+      background-color="#ffefcb"
+      active-at="['/']">
+      <h1>Tern PoC</h1>
+      <p>A FOLIO Migration Utility.</p>
+      <a class="btn btn-primary" href="https://github.com/TAMULib/Tern-PoC">Tern PoC Source</a>
+    </wvr-hero>
+    
+    <alerts types="WARNING, ERROR"></alerts>
+		<alerts seconds="45" channels="auth/register" types="SUCCESS"></alerts>
+
+		<div class="container-fluid">
+			<div class="container">
+
+        
+
+
+				<div class="col-md-12 appContent">
+
+					<nav class="pull-right userMenu" ng-controller="AuthenticationController">
+
+					  <!-- <modal modal-id="verifyEmailModal" modal-view="node_modules/weaver-ui-core/app/views/modals/verifyEmailModal.html" modal-header-class="modal-header-primary"></modal>					
+						<modal modal-id="loginModal" modal-view="node_modules/weaver-ui-core/app/views/modals/loginModal.html" modal-header-class="modal-header-primary"></modal> -->
+
+						<ul  ng-if="isAnonymous()" class="list-inline">
+						  	<li><a href ng-if="isAnonymous()" ng-click="openModal('#loginModal')">Login</a></li>
+						  	<li><a href ng-if="isAnonymous()" ng-click="openModal('#verifyEmailModal')">Register</a></li>
+						</ul>
+												
+						<div ng-if="!isAnonymous()" class="dropdown">
+							<span class="glyphicon glyphicon-user"></span>
+							
+							<a class="dropdown-toggle hover-pointer" data-toggle="dropdown" aria-expanded="false"><username></username> <span class="caret"></span></a>
+
+							<ul class="dropdown-menu" role="menu">
+								<li ng-if="isAdmin() || isAssuming() == 'true'" role="presentation" class="dropdown-header">Manager Actions</li>
+								<li ng-if="isAdmin() || isManager()" ><a href="users">Manage Users</a></li>
+								<li ng-if="isAdmin() || isAssuming() == 'true'" role="presentation" class="divider"></li>
+								<li ng-if="isAdmin() || isAssuming() == 'true'" role="presentation" class="dropdown-header">Admin Actions</li>
+								<li ng-if="isAdmin() || isAssuming() == 'true'" ng-controller="AdminController">
+									<a href ng-if="isAssuming() == 'false'" ng-click="openModal('#assumeUserModal')">{{assumedControl.button}}</a>
+									<a href ng-if="isAssuming() == 'true'" ng-click="assumeUser()" >{{assumedControl.button}}</a>
+								</li>
+								<li role="presentation" class="divider"></li>
+								<li><a href ng-click="logout()">Logout</a></li>
+							</ul>
+						</div>
+								
+					</nav>
+
+					<div ng-controller="AdminController">
+						<modal modal-id="assumeUserModal" modal-view="node_modules/weaver-ui-core/app/views/modals/assumeUserModal.html" modal-header-class="modal-header-primary"></modal>
+					</div>	
+
+					<div class="row" ng-controller="NavigationController">
+
+						<div class="col-12 col-lg-12">
+
+							<div class="btn-group btn-group-lg app-menu" ng-class="{'btn-group-justified': windowWidth > 750, 'btn-group-vertical vertical-justified': windowWidth <= 750}" role="group">							
+								<a ng-class="{'active' : view == '/users'}" class="btn btn-default" href="users">Users</a>
+								<a ng-class="{'active' : view == '/theme'}" class="btn btn-default" href="theme">Theme Manager</a>	
+								<a class="btn btn-default" href="directives" ng-class="{'active' : view == '/directives'}">Directives</a>							
+							</div>
+						</div>
+					</div>
+					
+					<div ng-view class="view"></div>
+
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<tamufooter></tamufooter>
+
+	<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+	<script>
+		(function(b, o, i, l, e, r) {
+			b.GoogleAnalyticsObject = l;
+			b[l] || (b[l] = function() {
+				(b[l].q = b[l].q || []).push(arguments)
+			});
+			b[l].l = +new Date;
+			e = o.createElement(i);
+			r = o.getElementsByTagName(i)[0];
+			e.src = '//www.google-analytics.com/analytics.js';
+			r.parentNode.insertBefore(e, r)
+		}(window, document, 'script', 'ga'));
+		ga('create', 'UA-XXXXX-X');
+		ga('send', 'pageview');
+	</script>
+
+	
+</body>
+</html>

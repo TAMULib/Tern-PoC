@@ -1,0 +1,31 @@
+{
+  "name": "tern-poc",
+  "private": true,
+  "version": "2.0.0",
+  "description": "An example user interface using the Weaver-UI-Core",
+  "repository": "https://github.com/TAMULib/Tern-PoC.git",
+  "license": "MIT",
+  "main": "./app/app.js",
+  "scripts": {
+    "build:dev": "wvr build --dev",
+    "build:watch": "wvr build --dev --watch",
+    "build": "wvr build --prod",
+    "postinstall": "npm run build",
+    "pretest": "npm install",
+    "test": "karma start karma.conf.js",
+    "test-single-run": "karma start karma.conf.js  --single-run",
+    "preupdate-webdriver": "npm install",
+    "update-webdriver": "webdriver-manager update",
+    "preprotractor": "npm run update-webdriver",
+    "protractor": "protractor e2e-tests/protractor.conf.js",
+    "stop": "wvr server --stop",
+    "start": "wvr server -b /tern-poc --prod --uid tern-webserver",
+    "start:dev": "wvr server -b /tern-poc --uid tern-webserver -p 8080",
+    "lint": "eslint \"app/**/*(*.js|*.ts)\"",
+    "lint:fix": "eslint \"app/**/*(*.js|*.ts)\" --fix"
+  },
+  "dependencies": {
+    "weaver-ui-core": "git+https://github.com/TAMULib/Weaver-UI-Core.git#webpack-upgrade"
+  },
+  "devDependencies": {}
+}

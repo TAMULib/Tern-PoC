@@ -1,0 +1,28 @@
+{
+  "plugins": ["angular"],
+  "env": {
+      "browser": true,
+      "es6": true,
+      "jquery": true
+  },
+  "extends": "eslint:recommended",
+  "parserOptions": {
+      "ecmaVersion": 2015,
+      "sourceType": "module"
+  },
+  "rules": {
+      "no-console": "off",
+      "indent": [
+          "error",
+          2
+      ],
+      "semi": [
+          "error",
+          "always"
+      ]
+  },
+  "globals": {
+      "angular": true,
+      "require": true
+  }
+}
