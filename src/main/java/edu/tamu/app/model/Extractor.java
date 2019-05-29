@@ -7,6 +7,6 @@ public interface Extractor {
 
   public TernSchema describeSchema();
 
-  public Stream<RowResult> extractData(List<TernField> fields);
+  public Stream<RowsResult> extractData(List<TernField> fields);
 
 }
