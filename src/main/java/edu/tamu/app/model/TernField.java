@@ -2,16 +2,11 @@ package edu.tamu.app.model;
 
 public class TernField {
 
-  private String data;
-  private String dataType;
-  private String columnName;
   private String tableName;
-
+  private String columnName;
+  private String dataType;
+  
   public TernField() {}
-
-  public String getData() {
-    return data;
-  }
 
   public String getTableName() {
     return tableName;
@@ -37,13 +32,8 @@ public class TernField {
     this.dataType = dataType;
   }
 
-  public void setData(String data) {
-    this.data = data;
-  }
-
-  public static TernField of(String data, String dataType, String columnName, String tableName) {
+  public static TernField of(String dataType, String columnName, String tableName) {
     TernField ternField = new TernField();
-    ternField.setData(data);
     ternField.setDataType(dataType);
     ternField.setColumnName(columnName);
     ternField.setTableName(tableName);
