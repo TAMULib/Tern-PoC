@@ -8,7 +8,7 @@ angular.module('app')
   .constant('appConfig', appConfig)
   .config(routes)
   .run(runTime);
-
+console.log(appConfig);
 export {
   apiMapping,
   appConfig,

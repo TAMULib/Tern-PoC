@@ -8,19 +8,9 @@ export default function routes($routeProvider) {
       templateUrl: 'views/users.html',
       access: ["ROLE_ADMIN", "ROLE_MANGER"]
     }).
-    when('/theme', {
-      templateUrl: 'views/theme.html',
-      access: ["ROLE_ADMIN"]
-    }).
-    when('/directives', {
-      templateUrl: 'views/directive-demo/directives.html',
-      controller: 'DirectiveGalleryController',
-      reloadOnSearch: false
-    }).
-    when('/directives/:tab', {
-      templateUrl: 'views/directive-demo/directives.html',
-      controller: 'DirectiveGalleryController',
-      reloadOnSearch: false
+    when('/dashboard', {
+      templateUrl: 'views/dashboard.html',
+      access: ["ROLE_ADMIN", "ROLE_MANGER"]
     }).
     when('/home', {
       redirectTo: '/'

@@ -26,13 +26,8 @@
 	<main>
 
     <tamuheader title=""></tamuheader>
-    
-    <wvr-hero 
-      full-width="true"
-      background-image="resources/images/bird.jpg"
-      background-color="#ffefcb"
-      active-at="['/']">
-      <nav class="pull-right userMenu" ng-controller="AuthenticationController">
+
+    <nav class="pull-right userMenu" ng-controller="AuthenticationController">
 
         <!-- <modal modal-id="verifyEmailModal" modal-view="node_modules/weaver-ui-core/app/views/modals/verifyEmailModal.html" modal-header-class="modal-header-primary"></modal>					
         <modal modal-id="loginModal" modal-view="node_modules/weaver-ui-core/app/views/modals/loginModal.html" modal-header-class="modal-header-primary"></modal> -->
@@ -66,9 +61,16 @@
       <div ng-controller="AdminController">
         <modal modal-id="assumeUserModal" modal-view="node_modules/weaver-ui-core/app/views/modals/assumeUserModal.html" modal-header-class="modal-header-primary"></modal>
       </div>	
+    
+    <wvr-hero 
+      full-width="true"
+      background-image="resources/images/bird.jpg"
+      background-color="#ffefcb"
+      active-at="['/']">
       <h1>Tern PoC</h1>
       <p>A FOLIO Migration Utility.</p>
       <a class="btn btn-primary" href="https://github.com/TAMULib/Tern-PoC">Tern PoC Source</a>
+      <a class="btn btn-success" href="dashboard">Get Started</a>
     </wvr-hero>
     
     <alerts types="WARNING, ERROR"></alerts>
