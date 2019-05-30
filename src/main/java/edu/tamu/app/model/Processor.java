@@ -4,11 +4,10 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 import javax.script.ScriptEngine;
-
-import com.fasterxml.jackson.databind.JsonNode;
+import javax.script.ScriptException;
 
 public interface Processor {
 
-  public Stream<Map<String, String>> process(Stream<RowsResult> rowsResults, Map<String, String> outBoundData, ScriptEngine engine);
+  public Stream<Map<String, String>> process(Stream<RowsResult> rowsResults, Map<String, String> outBoundData, ScriptEngine engine) throws ScriptException;
 
 }

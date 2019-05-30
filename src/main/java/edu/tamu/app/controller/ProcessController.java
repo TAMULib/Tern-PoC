@@ -6,8 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
+import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -38,7 +40,7 @@ public class ProcessController {
 
   @RequestMapping("/run")
   @PreAuthorize("hasRole('ANONYMOUS')")
-  public ApiResponse run() throws JsonProcessingException, IOException {
+  public ApiResponse run() throws JsonProcessingException, IOException, ScriptException {
 
     DirectProcessor dp = new DirectProcessor();
 
@@ -48,9 +50,8 @@ public class ProcessController {
     rows.put(ternColumn, "The Value");
     rowsResult.setRows(rows);
     ScriptEngine engine = manager.getEngineByExtension("js");
-
     Map<String, String> mappedValues = new HashMap<String,String>();
-    mappedValues.put("fieldOne", null);
+    mappedValues.put("fieldOne", "");
 
     List< Map<String, String>> results = dp.process(Stream.of(rowsResult), mappedValues, engine)
       .collect(toList());
