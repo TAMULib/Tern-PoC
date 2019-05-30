@@ -3,16 +3,16 @@ package edu.tamu.app.model;
 import java.util.Map;
 
 public class RowsResult {
-  private Map<TernColumn, String> rows;
+  private Map<String, String> rows;
 
   public RowsResult() {
   }
 
-  public Map<TernColumn, String> getRows() {
+  public Map<String, String> getRows() {
     return rows;
   }
 
-  public void setRows(Map<TernColumn, String> rows) {
+  public void setRows(Map<String, String> rows) {
     this.rows = rows;
   }
 

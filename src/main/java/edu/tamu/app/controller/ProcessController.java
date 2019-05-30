@@ -45,15 +45,17 @@ public class ProcessController {
     DirectProcessor dp = new DirectProcessor();
 
     RowsResult rowsResult = new RowsResult();
-    Map<TernColumn, String> rows = new HashMap<TernColumn, String>();
+    Map<String, String> rows = new HashMap<String, String>();
     TernColumn ternColumn = TernColumn.of("foo", "bar", "biz");
-    rows.put(ternColumn, "The Value");
+    rows.put(ternColumn.getColumnName(), "The Value");
     rowsResult.setRows(rows);
+    
     ScriptEngine engine = manager.getEngineByExtension("js");
+    
     Map<String, String> mappedValues = new HashMap<String,String>();
     mappedValues.put("fieldOne", "");
 
-    List< Map<String, String>> results = dp.process(Stream.of(rowsResult), mappedValues, engine)
+    List< JsonNode> results = dp.process(Stream.of(rowsResult), objectMapper.valueToTree(mappedValues), engine)
       .collect(toList());
 
     return new ApiResponse(SUCCESS, results);
