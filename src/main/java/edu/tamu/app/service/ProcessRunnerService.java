@@ -49,7 +49,7 @@ public class ProcessRunnerService {
     processors.put(directProcessor.getName(), directProcessor);
   }
 
-  public JsonNode runProcessor(RowsResult rowsResults, JsonNode outBoundData, Processor processor)
+  private JsonNode runProcessor(RowsResult rowsResults, JsonNode outBoundData, Processor processor)
       throws ScriptException {
     Invocable invocable = (Invocable) scriptEngines.get(processor.getType());
     return processor.process(rowsResults, outBoundData, invocable);
