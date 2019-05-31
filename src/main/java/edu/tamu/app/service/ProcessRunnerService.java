@@ -1,5 +1,6 @@
 package edu.tamu.app.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,14 +46,18 @@ public class ProcessRunnerService {
     DirectProcessor directProcessor = new DirectProcessor();
     scriptEngines
       .get(directProcessor.getType())
-      .eval(directProcessor.getLogic());
+      .eval(directProcessor.getLogicFunction());
     processors.put(directProcessor.getName(), directProcessor);
   }
 
-  private JsonNode runProcessor(RowsResult rowsResults, JsonNode outBoundData, Processor processor)
+  public JsonNode runProcessor(RowsResult rowsResults, JsonNode outBoundData, Processor processor)
       throws ScriptException {
     Invocable invocable = (Invocable) scriptEngines.get(processor.getType());
     return processor.process(rowsResults, outBoundData, invocable);
+  }
+
+  public List<Processor> getAllDefaultProcessors() {
+    return new ArrayList<Processor>(processors.values());
   }
 
 }
