@@ -4,7 +4,8 @@ import java.util.List;
 
 public class TernTable {
 
-    private TernSchema schema;
+    private String catalog;
+    private String schema;
     private String name;
     private String type;
     private List<TernColumn> columns;
@@ -12,11 +13,19 @@ public class TernTable {
     public TernTable() {
     }
 
-    public void setSchema(TernSchema schema) {
+    public String getCatalog() {
+        return catalog;
+    }
+
+    public void setCatalog(String catalog) {
+        this.catalog = catalog;
+    }
+
+    public void setSchema(String schema) {
         this.schema = schema;
     }
 
-    public TernSchema getSchema() {
+    public String getSchema() {
         return schema;
     }
 
@@ -44,8 +53,9 @@ public class TernTable {
         return columns;
     }
 
-    public static TernTable of(TernSchema schema, String name, String type, List<TernColumn> columns) {
+    public static TernTable of(String catalog, String schema, String name, String type, List<TernColumn> columns) {
         TernTable ternTable = new TernTable();
+        ternTable.setCatalog(catalog);
         ternTable.setSchema(schema);
         ternTable.setName(name);
         ternTable.setType(type);
