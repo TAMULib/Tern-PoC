@@ -2,7 +2,6 @@ package edu.tamu.app.model;
 
 public class TernColumn {
 
-    private TernTable table;
     private String name;
     private String type;
     private Integer size;
@@ -11,14 +10,6 @@ public class TernColumn {
     private String defaultValue;
 
     public TernColumn() {
-    }
-
-    public TernTable getTable() {
-        return table;
-    }
-
-    public void setTable(TernTable table) {
-        this.table = table;
     }
 
     public String getName() {
@@ -69,9 +60,8 @@ public class TernColumn {
         this.defaultValue = defaultValue;
     }
 
-    public static TernColumn of(TernTable table, String name, String type, Integer size, Integer digits, Integer precision, String defaultValue) {
+    public static TernColumn of(String name, String type, Integer size, Integer digits, Integer precision, String defaultValue) {
         TernColumn ternColumn = new TernColumn();
-        ternColumn.setTable(table);
         ternColumn.setName(name);
         ternColumn.setType(type);
         ternColumn.setSize(size);
