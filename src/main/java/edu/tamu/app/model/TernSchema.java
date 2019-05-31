@@ -7,7 +7,7 @@ public class TernSchema {
     private String catalog;
     private String schema;
     private List<TernTable> tables;
-    private List<String> types;
+    private String[] types;
 
     public TernSchema() {
     }
@@ -36,15 +36,15 @@ public class TernSchema {
         return tables;
     }
 
-    public void setTypes(List<String> types) {
+    public void setTypes(String[] types) {
         this.types = types;
     }
 
-    public List<String> getTypes() {
+    public String[] getTypes() {
         return types;
     }
 
-    public static TernSchema of(String catalog, String schema, List<TernTable> tables, List<String> types) {
+    public static TernSchema of(String catalog, String schema, List<TernTable> tables, String[] types) {
         TernSchema ternSchema = new TernSchema();
         ternSchema.setCatalog(catalog);
         ternSchema.setSchema(schema);
