@@ -2,6 +2,10 @@ package edu.tamu.app.model;
 
 import java.util.Map;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.script.Invocable;
 import javax.script.ScriptException;
 
@@ -9,24 +13,24 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class DirectProcessor implements Processor {
+import edu.tamu.app.model.validation.CustomProcessorValidator;
+import edu.tamu.weaver.validation.model.ValidatingBaseEntity;
 
+@Entity
+public class CustomProcessor extends ValidatingBaseEntity implements Processor {
+
+  @Column(unique = true)
   private String name;
 
+  @Column
+  @Enumerated(EnumType.STRING)
   private ProcessorType type;
-
+  
+  @Column
   private String logic;
   
-  public DirectProcessor() {
-    this.name = "Direct Processor";
-    this.type = ProcessorType.JS;
-    StringBuilder logicBuilder = new StringBuilder();
-    logicBuilder.append("  var rowsResult = JSON.parse(rowsResultString);");
-    logicBuilder.append("  var mappedValues = JSON.parse(mappedValuesString);");
-    logicBuilder.append("  var rowKeys = Object.keys(rowsResult);");
-    logicBuilder.append("  var mappedValuesFirstKey = Object.keys(mappedValues)[0];");
-    logicBuilder.append("  mappedValues[mappedValuesFirstKey] = rowsResult[rowKeys[0]];");
-    this.logic = logicBuilder.toString();
+  public CustomProcessor() {
+    setModelValidator(new CustomProcessorValidator());
   }
 
   @Override
@@ -36,7 +40,7 @@ public class DirectProcessor implements Processor {
     JsonNode outboundValue;
     try {
       String rowsJson = objectMapper.writeValueAsString(rowsResult.getRows());
-      Map<String, String> resultMap = (Map<String, String>) invocable.invokeFunction(getLogicFunctionName(), rowsJson, mappedValues.toString());
+      Map<String, String> resultMap = (Map<String, String>) invocable.invokeFunction("directProcessorLogic", rowsJson, mappedValues.toString());
       outboundValue = objectMapper.valueToTree(resultMap);
     } catch (NoSuchMethodException | ScriptException | JsonProcessingException e) {
       e.printStackTrace();
@@ -50,13 +54,26 @@ public class DirectProcessor implements Processor {
     return name;
   }
 
+  public void setName(String name) {
+    this.name = name;
+  }
+
   @Override
   public ProcessorType getType() {
     return type;
+  }
+
+  public void setType(ProcessorType type) {
+    this.type = type;
   }
 
   @Override
   public String getLogic() {
     return logic;
   }
+
+  public void setLogic(String logic) {
+    this.logic = logic;
+  }
+  
 }
