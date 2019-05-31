@@ -1,49 +1,65 @@
 package edu.tamu.app.model;
 
 import java.util.Map;
-import java.util.stream.Stream;
 
 import javax.script.Invocable;
-import javax.script.ScriptEngine;
 import javax.script.ScriptException;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class DirectProcessor implements Processor {
+
+  private String name;
+
+  private ProcessorType type;
+
+  private String logic;
   
-  private ObjectMapper objectMapper = new ObjectMapper();
-
-  @Override
-  public Stream<JsonNode> process(Stream<RowsResult> rowsResults, JsonNode mappedValues, ScriptEngine scriptEngine) throws ScriptException {
-
-    StringBuilder logic = new StringBuilder();
-    logic.append("var processorLogic = function(rowsResultString, mappedValues) {");
-    logic.append("  var rowsResult = JSON.parse(rowsResultString);");
-
-    logic.append("  ;");
-
-
-    logic.append("  return rowsResult;");
-    logic.append("}");
-
-    scriptEngine.eval(logic.toString());
-    Invocable invocable = (Invocable) scriptEngine;
-
-    return rowsResults.map(rowsResult -> {
-      JsonNode outboundValue;
-      try {
-        // String mappedValuesJson = objectMapper.writeValueAsString(mappedValues);
-        Map<String,String> rowsResultJson = objectMapper.valueToTree(rowsResult.getRows());
-        // System.out.println(mappedValuesJson);
-        // System.out.println(rowsResultJson);
-        outboundValue = (JsonNode) invocable.invokeFunction("processorLogic", rowsResultJson, mappedValues);
-      } catch (NoSuchMethodException | ScriptException e) {
-        e.printStackTrace();
-        outboundValue = mappedValues;
-      }
-      return outboundValue;
-    });
+  public DirectProcessor() {
+    this.name = "Direct Processor";
+    this.type = ProcessorType.JS;
+    StringBuilder logicBuilder = new StringBuilder();
+    logicBuilder.append("var directProcessorLogic = function(rowsResultString, mappedValuesString) {");
+    logicBuilder.append("  var rowsResult = JSON.parse(rowsResultString);");
+    logicBuilder.append("  var mappedValues = JSON.parse(mappedValuesString);");
+    logicBuilder.append("  var rowKeys = Object.keys(rowsResult);");
+    logicBuilder.append("  var mappedValuesFirstKey = Object.keys(mappedValues)[0];");
+    logicBuilder.append("  mappedValues[mappedValuesFirstKey] = rowsResult[rowKeys[0]];");
+    logicBuilder.append("  return mappedValues;");
+    logicBuilder.append("}");
+    this.logic = logicBuilder.toString();
   }
 
+  @Override
+  public JsonNode process(RowsResult rowsResult, JsonNode mappedValues, Invocable invocable)
+      throws ScriptException {
+    ObjectMapper objectMapper = new ObjectMapper();
+    JsonNode outboundValue;
+    try {
+      String rowsJson = objectMapper.writeValueAsString(rowsResult.getRows());
+      Map<String, String> resultMap = (Map<String, String>) invocable.invokeFunction("directProcessorLogic", rowsJson, mappedValues.toString());
+      outboundValue = objectMapper.valueToTree(resultMap);
+    } catch (NoSuchMethodException | ScriptException | JsonProcessingException e) {
+      e.printStackTrace();
+      outboundValue = mappedValues;
+    }
+    return outboundValue;
+  }
+
+  @Override
+  public String getName() {
+    return name;
+  }
+
+  @Override
+  public ProcessorType getType() {
+    return type;
+  }
+
+  @Override
+  public String getLogic() {
+    return logic;
+  }
 }

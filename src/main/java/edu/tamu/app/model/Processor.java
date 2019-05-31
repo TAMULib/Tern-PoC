@@ -1,15 +1,15 @@
 package edu.tamu.app.model;
 
-import java.util.Map;
-import java.util.stream.Stream;
-
-import javax.script.ScriptEngine;
+import javax.script.Invocable;
 import javax.script.ScriptException;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
 public interface Processor {
 
-  public Stream<JsonNode> process(Stream<RowsResult> rowsResults, JsonNode outBoundData, ScriptEngine engine) throws ScriptException;
+  public String getName();
+  public ProcessorType getType();
+  public String getLogic();
 
+  public JsonNode process(RowsResult rowsResults, JsonNode outBoundData, Invocable invocable) throws ScriptException;
 }
