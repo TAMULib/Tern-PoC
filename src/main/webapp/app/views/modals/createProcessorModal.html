@@ -1,0 +1,40 @@
+<form name="processorForms.create" ng-submit="createProcessor()" novalidate class="rv-forms-create">
+  <div class="modal-header {{attr.modalHeaderClass}}">
+    <button type="button" class="close modal-close" aria-label="Close" ng-click="cancelCreateProcessor()"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">Create Custom Processor</h4>
+  </div>
+  <div class="modal-body">
+
+    <validationmessage results="processorForms.getResults()"></validationmessage>
+
+    <validatedinput
+      model="processorToCreate"
+      property="name"
+      label="Name"
+      placeholder="Name of the Custom Processor"
+      form="processorForms.create"
+      validations="processorForms.validations"
+      results="processorForms.getResults()"
+      autocomplete="off"
+      no-id="true">
+    </validatedinput>
+
+    <validatedtextarea
+      model="processorToCreate"
+      property="logic"
+      label="Logic"
+      form="processorForms.create"
+      validations="processorForms.validations"
+      results="processorForms.getResults()"
+      no-id="true">
+    </validatedtextarea>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn pull-left btn-warning" ng-disabled="processorForms.create.logic.$modelValue === ''" ng-click="testProcessor(processorToCreate)">Test Processor</button>
+    <button type="button" class="btn" ng-class="{'btn-default': processorForms.create.$pristine, 'btn-warning': !processorForms.create.$pristine}" ng-click="cancelCreateProcessor()">Cancel</button>
+    <button type="submit" class="btn btn-success" >Create</button>
+  </div>
+  
+</form>
+  

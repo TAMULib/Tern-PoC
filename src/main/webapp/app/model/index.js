@@ -1,10 +1,11 @@
 import AbstractAppModel from './abstractAppModel';
-import Theme from './theme';
+import Processor from './processor';
 
 angular.module('app')
   .factory('AbstractAppModel', AbstractAppModel)
-  .model('Theme', Theme);
+  .model('Processor', Processor);
 
 export {
-  AbstractAppModel
+  AbstractAppModel,
+  Processor
 };

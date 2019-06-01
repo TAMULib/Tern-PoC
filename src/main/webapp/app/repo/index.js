@@ -1,14 +1,14 @@
 import AbstractAppRepo from './abstractAppRepo';
-import ThemeRepo from './themeRepo';
+import ProcessorRepo from './processorRepo';
 import UserRepo from './userRepo';
 
 angular.module('app')
   .service('AbstractAppRepo', AbstractAppRepo)
-  .repo('ThemeRepo', ThemeRepo)
+  .repo('ProcessorRepo', ProcessorRepo)
   .repo('UserRepo', UserRepo);
 
 export {
   AbstractAppRepo,
-  ThemeRepo,
+  ProcessorRepo,
   UserRepo
 };

@@ -1,0 +1,40 @@
+<form name="processorForms.update" ng-submit="updateProcessor()" novalidate class="rv-forms-update">
+  <div class="modal-header {{attr.modalHeaderClass}}">
+    <button type="button" class="close modal-close" aria-label="Close" ng-click="cancelUpdateProcessor()"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">Update Custom Processor</h4>
+  </div>
+  <div class="modal-body">
+
+    <validationmessage results="processorForms.getResults()"></validationmessage>
+
+    <validatedinput
+      model="processorToUpdate"
+      property="name"
+      label="Name"
+      placeholder="Name of the Custom Processor"
+      form="processorForms.update"
+      validations="processorForms.validations"
+      results="processorForms.getResults()"
+      autocomplete="off"
+      no-id="true">
+    </validatedinput>
+
+    <validatedtextarea
+      model="processorToUpdate"
+      property="logic"
+      label="Logic"
+      form="processorForms.update"
+      validations="processorForms.validations"
+      results="processorForms.getResults()"
+      no-id="true">
+    </validatedtextarea>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn pull-left btn-warning" ng-disabled="processorForms.update.logic.$modelValue === ''" ng-click="testProcessor(processorToU[date])">Test Processor</button>
+    <button type="button" class="btn" ng-class="{'btn-default': processorForms.update.$pristine, 'btn-warning': !processorForms.update.$pristine}" ng-click="cancelUpdateProcessor()">Cancel</button>
+    <button type="submit" class="btn btn-warning" >Update</button>
+  </div>
+  
+</form>
+  

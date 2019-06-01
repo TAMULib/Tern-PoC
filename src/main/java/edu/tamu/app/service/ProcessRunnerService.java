@@ -24,7 +24,7 @@ import edu.tamu.app.model.RowsResult;
 @Service
 public class ProcessRunnerService {
 
-  public Map<String, Processor> processors;
+  private Map<String, Processor> processors;
 
   private ScriptEngineManager scriptEngineManager;
 
@@ -44,10 +44,14 @@ public class ProcessRunnerService {
 
   private void preLoadProcessors() throws ScriptException {
     DirectProcessor directProcessor = new DirectProcessor();
-    scriptEngines
-      .get(directProcessor.getType())
-      .eval(directProcessor.getLogicFunction());
+    registerProcessor(directProcessor);
     processors.put(directProcessor.getName(), directProcessor);
+  }
+
+  public void registerProcessor(Processor processor) throws ScriptException {
+    scriptEngines
+      .get(processor.getType())
+      .eval(processor.getLogicFunction());
   }
 
   public JsonNode runProcessor(RowsResult rowsResults, JsonNode outBoundData, Processor processor)

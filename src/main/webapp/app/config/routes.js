@@ -9,8 +9,15 @@ export default function routes($routeProvider) {
       access: ["ROLE_ADMIN", "ROLE_MANGER"]
     }).
     when('/dashboard', {
-      templateUrl: 'views/dashboard.html',
-      access: ["ROLE_ADMIN", "ROLE_MANGER"]
+      redirectTo: '/dashboard/processor-management'
+    }).
+    when('/dashboard/:tab', {
+      templateUrl:  'views/management/dashboard.html',
+      reloadOnSearch: false
+    }).
+    when('/dashboard/processor-management', {
+      templateUrl: 'views/management/dashboard.html',
+      reloadOnSearch: false
     }).
     when('/home', {
       redirectTo: '/'

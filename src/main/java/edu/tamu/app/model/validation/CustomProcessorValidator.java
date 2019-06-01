@@ -14,6 +14,7 @@ public class CustomProcessorValidator extends BaseModelValidator {
         
         String logicProperty = "logic";
         this.addInputValidator(new InputValidator(InputValidationType.required, "A Custom Processor requires logic", logicProperty, true));
+        this.addInputValidator(new InputValidator(InputValidationType.minlength, "Custom Processor logic must be at least 2 charachters long.", logicProperty, 9));
         //this.addInputValidator(new InputValidator(InputValidationType.pattern, "A Custom Processor's logic cannot contain a return statement", logicProperty, ));
         
     }

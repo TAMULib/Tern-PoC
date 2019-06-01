@@ -205,3 +205,16 @@ main footer {
 .view-theme-manager .input-group-addon label {
   min-width: 100px;
 }
+
+.clickable:hover {
+  cursor: pointer;
+}
+
+.actions .action {
+  color: #272727;
+}
+
+.actions .action:hover {
+  color: #666;
+  cursor: pointer;
+}

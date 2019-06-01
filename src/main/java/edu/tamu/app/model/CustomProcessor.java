@@ -26,7 +26,7 @@ public class CustomProcessor extends ValidatingBaseEntity implements Processor {
   @Enumerated(EnumType.STRING)
   private ProcessorType type;
   
-  @Column
+  @Column(length=1000)
   private String logic;
   
   public CustomProcessor() {
@@ -40,7 +40,7 @@ public class CustomProcessor extends ValidatingBaseEntity implements Processor {
     JsonNode outboundValue;
     try {
       String rowsJson = objectMapper.writeValueAsString(rowsResult.getRows());
-      Map<String, String> resultMap = (Map<String, String>) invocable.invokeFunction("directProcessorLogic", rowsJson, mappedValues.toString());
+      Map<String, String> resultMap = (Map<String, String>) invocable.invokeFunction(getLogicFunctionName(), rowsJson, mappedValues.toString());
       outboundValue = objectMapper.valueToTree(resultMap);
     } catch (NoSuchMethodException | ScriptException | JsonProcessingException e) {
       e.printStackTrace();

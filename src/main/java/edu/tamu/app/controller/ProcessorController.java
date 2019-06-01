@@ -104,9 +104,9 @@ public class ProcessorController {
       return new ApiResponse(SUCCESS);
     }
 
-    @RequestMapping("/test-run")
+    @PostMapping("/custom/test-run")
     @PreAuthorize("hasRole('ANONYMOUS')")
-    public ApiResponse testRun(@RequestBody Processor processor) throws IllegalArgumentException, ScriptException {
+    public ApiResponse testRun(@RequestBody CustomProcessor processor) throws IllegalArgumentException, ScriptException {
         
         RowsResult rowsResult = new RowsResult();
         Map<String, String> rows = new HashMap<String, String>();
@@ -116,7 +116,9 @@ public class ProcessorController {
 
         Map<String, String> mappedValues = new HashMap<String,String>();
         mappedValues.put("fieldOne", "");
-        
+
+        processRunnerService.registerProcessor(processor);
+
         return new ApiResponse(SUCCESS, processRunnerService.runProcessor(rowsResult, objectMapper.valueToTree(mappedValues), processor));
     }
 

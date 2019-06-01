@@ -1,0 +1,54 @@
+<div ng-controller="ProcessorController">
+  <h2>Processor Management</h2>
+
+  <div class="panel panel-default repository-view-container">
+
+      <div class="panel-heading clearfix">
+        <modal
+          modal-id="createProcessorModal"
+          modal-view="views/modals/createProcessorModal.html"
+          modal-btn-classes="btn btn-success pull-right"
+          modal-header-class="modal-header-primary"
+          modal-fullscreen="true"
+          wvr-modal-backdrop="static">
+          New
+        </modal>
+      </div>
+  
+      <div class="panel-body">
+        <table ng-table="tableParams" class="table table-hover repository-view-table">
+          <tbody>
+            <tr ng-repeat="processor in $data | orderBy: 'name'">
+              <td data-title="'Name'">
+                {{processor.name}}
+              </td>
+              <td data-title="'Type'">
+                {{processor.type}}
+              </td>
+              <td data-title="'Actions'" class="actions">
+                  <span title="edit" ng-click="beginUpdateProcessor(processor)" class="glyphicon glyphicon-pencil action clickable"></span>
+                  <span title="delete" ng-click="confirmDeleteProcessor(processor)" class="glyphicon glyphicon-trash action clickable"></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <modal
+    modal-id="deleteProcessorModal"
+    modal-view="views/modals/deleteProcessorModal.html"
+    modal-header-class="modal-header-danger"
+    wvr-modal-backdrop="static">
+  </modal>
+
+  <modal
+    modal-id="updateProcessorModal"
+    modal-view="views/modals/updateProcessorModal.html"
+    modal-header-class="modal-header-warning"
+    modal-fullscreen="true"
+    wvr-modal-backdrop="static">
+  </modal>
+
+</div>
+

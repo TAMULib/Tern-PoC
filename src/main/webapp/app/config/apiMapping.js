@@ -1,39 +1,33 @@
 // CONVENTION: must match model name, case sensitive
 export const apiMapping = {
-  Theme: {
+  Processor: {
     all: {
       'endpoint': '/private/queue',
-      'controller': 'theme',
-      'method': 'all'
+      'controller': 'processor/custom',
+      'httpMethod': 'GET'
     },
     listen: {
       'endpoint': '/channel',
-      'controller': 'theme'
+      'controller': 'custom-processor'
     },
     create: {
       'endpoint': '/private/queue',
-      'controller': 'theme',
-      'method': 'add-theme'
+      'controller': 'processor/custom',
+      'httpMethod': 'POST'
     },
     remove: {
       'endpoint': '/private/queue',
-      'controller': 'theme',
-      'method': 'remove-theme'
-    },
-    activate: {
-      'endpoint': '/private/queue',
-      'controller': 'theme',
-      'method': 'activate-theme'
+      'controller': 'processor/custom',
+      'httpMethod': 'DELETE'
     },
     update: {
       'endpoint': '/private/queue',
-      'controller': 'theme',
-      'method': 'update'
+      'controller': 'processor/custom',
+      'httpMethod': 'PUT'
     },
-    updateThemeProperty: {
+    test: {
       'endpoint': '/private/queue',
-      'controller': 'theme',
-      'method': 'update-property'
+      'controller': 'processor/custom/test-run'
     }
   },
   User: {
