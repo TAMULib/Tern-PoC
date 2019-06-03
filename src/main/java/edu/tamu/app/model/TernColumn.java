@@ -2,43 +2,73 @@ package edu.tamu.app.model;
 
 public class TernColumn {
 
-  private String tableName;
-  private String columnName;
-  private String dataType;
+    private String name;
+    private String type;
+    private Integer size;
+    private Integer digits;
+    private Integer precision;
+    private String defaultValue;
 
-  public TernColumn() {
-  }
+    public TernColumn() {
+    }
 
-  public String getTableName() {
-    return tableName;
-  }
+    public String getName() {
+        return name;
+    }
 
-  public void setTableName(String tableName) {
-    this.tableName = tableName;
-  }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  public String getColumnName() {
-    return columnName;
-  }
+    public void setType(String type) {
+        this.type = type;
+    }
 
-  public void setColumnName(String columnName) {
-    this.columnName = columnName;
-  }
+    public String getType() {
+        return type;
+    }
 
-  public String getDataType() {
-    return dataType;
-  }
+    public Integer getSize() {
+        return size;
+    }
 
-  public void setDataType(String dataType) {
-    this.dataType = dataType;
-  }
+    public void setSize(Integer size) {
+        this.size = size;
+    }
 
-  public static TernColumn of(String dataType, String columnName, String tableName) {
-    TernColumn ternField = new TernColumn();
-    ternField.setDataType(dataType);
-    ternField.setColumnName(columnName);
-    ternField.setTableName(tableName);
-    return ternField;
-  }
-  
+    public Integer getDigits() {
+        return digits;
+    }
+
+    public void setDigits(Integer digits) {
+        this.digits = digits;
+    }
+
+    public Integer getPrecision() {
+        return precision;
+    }
+
+    public void setPrecision(Integer precision) {
+        this.precision = precision;
+    }
+
+    public String getDefaultValue() {
+        return defaultValue;
+    }
+
+    public void setDefaultValue(String defaultValue) {
+        this.defaultValue = defaultValue;
+    }
+
+    public static TernColumn of(String name, String type, Integer size, Integer digits, Integer precision, String defaultValue) {
+        TernColumn ternColumn = new TernColumn();
+        ternColumn.setName(name);
+        ternColumn.setType(type);
+        ternColumn.setSize(size);
+        ternColumn.setDigits(digits);
+        ternColumn.setPrecision(precision);
+        ternColumn.setDefaultValue(defaultValue);
+        return ternColumn;
+    }
+
 }
