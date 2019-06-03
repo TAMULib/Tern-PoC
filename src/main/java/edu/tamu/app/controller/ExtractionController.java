@@ -2,8 +2,6 @@ package edu.tamu.app.controller;
 
 import static edu.tamu.weaver.response.ApiStatus.SUCCESS;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +15,6 @@ import edu.tamu.weaver.response.ApiResponse;
 @RestController
 @RequestMapping("/extraction")
 public class ExtractionController {
-    @PersistenceContext(unitName = "extractor-database")
-    EntityManager extrationDatasourceManager;
 
     @Autowired
     VoyagerExtractorService voyagerExtractorService;
@@ -27,7 +23,7 @@ public class ExtractionController {
     @RequestMapping("/schema")
     @PreAuthorize("hasRole('ANONYMOUS')")
     public ApiResponse describeSchema() {
-        return new ApiResponse(SUCCESS, voyagerExtractorService.describeSchema(extrationDatasourceManager));
+        return new ApiResponse(SUCCESS, voyagerExtractorService.describeSchema());
     }
 
 }

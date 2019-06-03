@@ -12,9 +12,11 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.hibernate.Session;
 import org.hibernate.jdbc.Work;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 //import org.springframework.beans.factory.annotation.Value;
@@ -28,6 +30,11 @@ import edu.tamu.app.model.TernTable;
 
 @Service("VoyagerExtractorService")
 public class VoyagerExtractorService implements ExtractorService {
+
+    @Autowired
+    @PersistenceContext(unitName = "extractor-database")
+    EntityManager entityManager;
+
     @Value("${extraction.schema.voyager.tableTypes}")
     private String[] tableTypes;
 
@@ -38,7 +45,7 @@ public class VoyagerExtractorService implements ExtractorService {
     }
 
     @Override
-    public TernSchema describeSchema(EntityManager entityManager) {
+    public TernSchema describeSchema() {
         Session session = entityManager.unwrap(Session.class);
         List<TernTable> ternTables = new ArrayList<>();
         TernSchema ternSchema = TernSchema.of(ternTables, tableTypes);

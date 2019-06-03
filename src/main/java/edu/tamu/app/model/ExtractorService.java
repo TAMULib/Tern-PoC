@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 
 public interface ExtractorService {
 
-  public TernSchema describeSchema(EntityManager entityManager);
+  public TernSchema describeSchema();
 
   public Stream<RowsResult> extractData(List<TernTable> ternTables);
 
